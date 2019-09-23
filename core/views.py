@@ -73,6 +73,18 @@ def PlayerList(request):
 
 
 @login_required
+def player_detail(request, pk=None):
+    user_obj = get_object_or_404(User, pk=pk)
+
+    context = {
+        "title": "Player Information",
+        "user_obj": user_obj
+    }
+
+    return render(request, 'core/player_details.html', context)
+
+
+@login_required
 def customer_add(request):
     if not request.user.is_salesperson:
         raise Http404

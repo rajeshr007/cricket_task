@@ -43,13 +43,9 @@
                     <td>{{ player.last_name }}</td>
                     <td>{{ player.email }}</td>
                     <td>{{ player.player_type }}</td>
-                    <td><a href="{# url 'customer_update' player.pk #}">
-                        <span class="glyphicon glyphicon-edit"></span>
+                    <td><a href="{% url 'player_detail' player.pk %}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
                     </a>
-                        &nbsp;
-                        <a href="{# url 'customer_delete' player.pk #}">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
                     </td>
                 </tr>
             {% endfor %}
