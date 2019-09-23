@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from django.urls import path, re_path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from core.views import signup, customerList, dashboard, customer_add, customer_update, customer_delete
+from core.views import signup, PlayerList, dashboard, customer_add, customer_update, customer_delete
 
 urlpatterns = [
     path('', dashboard, name='home'),
@@ -27,7 +27,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
 
     path('signup/', signup, name='signup'),
-    # url(r'^customers/$', customerList, name='customers'),
+    path('players/', PlayerList, name='players'),
     # url(r'^customer/add/$', customer_add, name='customer_add'),
     # url(r'^customer/(?P<pk>\d+)/edit/$', customer_update, name='customer_update'),
     # url(r'^customer/(?P<pk>\d+)/delete/$', customer_delete, name='customer_delete'),

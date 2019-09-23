@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import Http404
-from .filters import UserFilter
+from .filters import PlayerFilter
 
 from .forms import SignUpForm, CustomerForm
 from match.models import ScoreCard
@@ -15,8 +15,8 @@ User = get_user_model()
 def dashboard(request):
     if request.user.is_authenticated:
         scorecard_obj = ScoreCard.objects.all()
-        max_runs_obj = scorecard_obj.order_by('-runs')
-        max_wicket_obj = scorecard_obj.order_by('-wicket')
+        max_runs_obj = scorecard_obj.order_by('-runs').first()
+        max_wicket_obj = scorecard_obj.order_by('-wicket').first()
         max_win_obj = ScoreCard.objects.filter(status="won").order_by('-status')
         max_win_count = max_win_obj.count()
 
@@ -26,7 +26,7 @@ def dashboard(request):
             "max_win_obj": max_win_obj,
             "max_win_count": max_win_count
         }
-        return render(request, 'core/dashboard.html',context)
+        return render(request, 'core/dashboard.html', context)
     else:
         return render(request, 'core/cover.html')
 
@@ -56,20 +56,20 @@ def signup(request):
 
 
 @login_required
-def customerList(request):
-    customer_list = CustomUser.customers.filter(is_active=True)
-    filter = UserFilter(request.GET, queryset=customer_list)
+def PlayerList(request):
+    player_list = User.players.filter(is_active=True)
+    filter = PlayerFilter(request.GET, queryset=player_list)
     if request.GET:
-        customer_list = filter.qs
-    paginator = Paginator(customer_list, 1)
+        player_list = filter.qs
+    paginator = Paginator(player_list, 10)
     page = request.GET.get('page')
     try:
-        customers = paginator.page(page)
+        players = paginator.page(page)
     except PageNotAnInteger:
-        customers = paginator.page(1)
+        players = paginator.page(1)
     except EmptyPage:
         customers = paginator.page(paginator.num_pages)
-    return render(request, 'core/customers.html', {'customers': customers, 'form': filter.form})
+    return render(request, 'core/players.html', {'players': players, 'form': filter.form})
 
 
 @login_required

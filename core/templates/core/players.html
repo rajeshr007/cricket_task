@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}Players{% endblock %}
+
+{% block head %}
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block main %}
+    <div class="page-header">
+        <a href="{# url 'customer_add' #}" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span> Add Player
+        </a>
+        <h1>Players</h1>
+    </div>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="users">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>S.No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Option</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for player in players %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ player.first_name }}</td>
+                    <td>{{ player.last_name }}</td>
+                    <td>{{ player.email }}</td>
+                    <td>{{ player.player_type }}</td>
+                    <td><a href="{# url 'customer_update' player.pk #}">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                        &nbsp;
+                        <a href="{# url 'customer_delete' player.pk #}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'paginator.html' with paginator=players %}
+            </div>
+        </div>
+
+    </div>
+{% endblock main %}

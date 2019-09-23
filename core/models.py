@@ -25,18 +25,18 @@ class Country(models.Model):
 
 class AdminManager(models.Manager):
     def get_queryset(self):
-        return super(AdminManager, self).get_queryset().filter(user_type='S')
+        return super(AdminManager, self).get_queryset().filter(user_type='admin')
 
 
 class PlayerManager(models.Manager):
     def get_queryset(self):
-        return super(PlayerManager, self).get_queryset().filter(user_type='C')
+        return super(PlayerManager, self).get_queryset().filter(user_type='player')
 
 
 class User(AbstractUser):
     type_choices = (
-        ('A', 'Admin'),
-        ('P', 'Player'),
+        ('admin', 'Admin'),
+        ('player', 'Player'),
     )
 
     PLAYER_TYPE_CHOICE = (
@@ -63,18 +63,18 @@ class User(AbstractUser):
         ordering = ['-date_joined']
 
     objects = UserManager()
-    salespersons = AdminManager()
-    customers = PlayerManager()
+    admins = AdminManager()
+    players = PlayerManager()
 
     @property
     def is_admin(self):
-        if self.user_type == 'A':
+        if self.user_type == 'admin':
             return True
         return False
 
     @property
     def is_player(self):
-        if self.user_type == 'P':
+        if self.user_type == 'player':
             return True
         return False
 
