@@ -8,7 +8,7 @@ from .filters import PlayerFilter
 
 from .forms import SignUpForm, CustomerForm
 from match.models import ScoreCard
-
+from django.urls import reverse
 User = get_user_model()
 
 
@@ -68,7 +68,7 @@ def PlayerList(request):
     except PageNotAnInteger:
         players = paginator.page(1)
     except EmptyPage:
-        customers = paginator.page(paginator.num_pages)
+        players = paginator.page(paginator.num_pages)
     return render(request, 'core/players.html', {'players': players, 'form': filter.form})
 
 
@@ -85,28 +85,25 @@ def player_detail(request, pk=None):
 
 
 @login_required
-def customer_add(request):
-    if not request.user.is_salesperson:
-        raise Http404
-
+def player_add(request):
     if request.method == 'POST':
-        form = CustomerForm(request.POST)
+        form = CustomerForm(request.POST, request.FILES)
         if not form.is_valid():
-            return render(request, 'core/customer_add.html',
+            return render(request, 'core/player_add.html',
                           {'form': form})
         else:
             user = form.save(commit=False)
-            user.user_type = 'C'
+            user.user_type = 'player'
             user.save()
             messages.success(request, "Successfully Added")
-            return redirect('/')
+            return redirect(reverse('players'))
 
     else:
         context = {
-            "title": 'Add Customer',
+            "title": 'Add Player',
             "form": CustomerForm(),
         }
-        return render(request, 'core/customer_add.html', context)
+        return render(request, 'core/player_add.html', context)
 
 
 @login_required

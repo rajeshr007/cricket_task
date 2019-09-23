@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from .models import Country
+from match.models import Team
 
 User = get_user_model()
 
@@ -72,7 +74,7 @@ class CustomerForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=30,
-        required=False)
+        required=True)
     last_name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=30,
@@ -81,13 +83,49 @@ class CustomerForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=30,
         required=True,
-        help_text='Usernames may contain <strong>alphanumeric</strong>, <strong>_</strong> and <strong>.</strong> characters')
+        help_text='Usernames may contain <strong>alphanumeric</strong>, <strong>_</strong> and <strong>.</strong> characters'
+    )
 
     email = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=75,
-        required=False)
+        label="Email Id",
+        required=True)
+
+    jersy_number = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+        required=True)
+
+    player_type = forms.ChoiceField(
+        choices=(
+            ('batsman', 'Batsman'),
+            ('bowler', 'Bowler'),
+            ('wicket keeper', 'Wicket Keeper'),
+            ('captain', 'Captain'),
+            ('All rounder', 'All Rounder'),
+        ),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    team = forms.ModelChoiceField(
+        queryset=Team.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    country = forms.ModelChoiceField(
+        queryset=Country.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    image_uri = forms.ImageField(
+        label="Image",
+        required=False
+    )
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email', 'jersy_number', 'player_type', 'team', 'country',
+                  'image_uri']
