@@ -20,17 +20,21 @@ from django.urls import path, re_path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from core.views import signup, PlayerList, dashboard,player_detail, player_add, customer_update, customer_delete
-
+from match.views import productList
 urlpatterns = [
     path('', dashboard, name='home'),
     path('login', auth_views.LoginView.as_view(template_name='core/cover.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
-
     path('signup/', signup, name='signup'),
+
     path('players/', PlayerList, name='players'),
     path('player/<int:pk>/', player_detail, name='player_detail'),
-
     path('player/add/', player_add, name='player_add'),
+
+    path('player/match/', productList, name='match'),
+
+    path('team/', include("match.urls")),
+
     # url(r'^customer/(?P<pk>\d+)/edit/$', customer_update, name='customer_update'),
     # url(r'^customer/(?P<pk>\d+)/delete/$', customer_delete, name='customer_delete'),
     # url(r'^product/', include("products.urls", namespace='products')),

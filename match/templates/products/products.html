@@ -5,61 +5,53 @@
 {% block title %}Products{% endblock %}
 
 {% block head %}
-    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+<link href="{% static 'css/common.css' %}" rel="stylesheet">
 {% endblock head %}
 
 {% block main %}
-    <div class="page-header">
-        <a href="{% url 'products:product_add' %}" class="btn btn-primary pull-right">
-            <span class="glyphicon glyphicon-plus"></span> Add Product
-        </a>
-        <h1>Products</h1>
-    </div>
-        {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    <div class="users">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>S.No</th>
-                <th>Display Name</th>
-                <th>Cost</th>
-                <th>Brand</th>
-                <th>Option</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for product in products %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ product.display_name }}</td>
-                    <td>{{ product.cost }}</td>
-                    <td>{{ product.brand }}</td>
-                    <td>
-                        <a href="{% url 'products:product_update' product.pk %}">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                        &nbsp;
-                        <a href="{% url 'products:product_delete' product.pk %}">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+<div class="page-header">
+    <h1>{{title}}</h1>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+    {% for team in teams %}
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>{{team.name}}</h4></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    {% if team.logo_uri %}
+                    <img src="{{team.logo_uri.url}}"
+                         width="100%" class="img-fluid">
+                    {% else %}
+                         <img src="{% static 'img/default.png' %}" alt="Default"
+                         width="100%" class="img-fluid">
+                    {% endif %}
+                </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                {% include 'paginator.html' with paginator=products %}
+                <div class="col-sm-8">
+                    <ul class="list-unstyled">
+                        <li><p>Club Name:  {{team.club_state}}</p></li>
+                        <li><p>Total Runs: {{team.total_runs}}</p></li>
+                        <li><p>Total Wickets:  {{team.total_wickets}}</p></li>
+                        <li><p>Total Wins:  {{team.total_status.win}}</p></li>
+                        <li><p>Total Loss:  {{team.total_status.loss}}</p></li>
+                        <li><p>Total Draw:  {{team.total_status.draw}}</p></li>
+                    </ul>
+                    <a href="{% url 'matches:team-players' team.id %}" target="_blank" class="btn btn-success">&nbsp;List of Player</a>
+                </div>
             </div>
         </div>
-
     </div>
+</div>
+    {% endfor %}
+</div>
 {% endblock main %}

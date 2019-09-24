@@ -6,21 +6,64 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from .models import Team
 
-from .forms import ProductForm
-from .models import Product
+
+# from .forms import ProductForm
+# from .models import Product
+
+
+##Team listing
+class TeamListView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        product_list = Team.objects.all()
+        paginator = Paginator(product_list, 10)
+        page = request.GET.get('page')
+        try:
+            teams = paginator.page(page)
+        except PageNotAnInteger:
+            teams = paginator.page(1)
+        except EmptyPage:
+            teams = paginator.page(paginator.num_pages)
+
+        context = {
+            "title": 'Team',
+            'teams': teams,
+        }
+
+        return render(request, 'products/products.html', context)
+
+
+##Player details after clicking o team
+class PlayersListView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        team_obj = Team.objects.get(pk=self.kwargs.get('pk'))
+        player_list = team_obj.player.all()
+        paginator = Paginator(player_list, 10)
+        page = request.GET.get('page')
+        try:
+            players = paginator.page(page)
+        except PageNotAnInteger:
+            players = paginator.page(1)
+        except EmptyPage:
+            players = paginator.page(paginator.num_pages)
+        return render(request, 'core/players.html', {'players': players})
+
 
 @login_required
 def productList(request):
-    product_list = Product.objects.all()
-    paginator = Paginator(product_list, 10)
-    page = request.GET.get('page')
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+    products = {}
+    # product_list = Product.objects.all()
+    # paginator = Paginator(product_list, 10)
+    # page = request.GET.get('page')
+    # try:
+    #     products = paginator.page(page)
+    # except PageNotAnInteger:
+    #     products = paginator.page(1)
+    # except EmptyPage:
+    #     products = paginator.page(paginator.num_pages)
     return render(request, 'products/products.html', {'products': products})
 
 
@@ -70,6 +113,7 @@ def product_update(request, pk=None):
             "form": ProductForm(instance=instance),
         }
         return render(request, 'products/products_update.html', context)
+
 
 @login_required
 def product_delete(request, pk=None):
