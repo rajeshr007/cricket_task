@@ -1,16 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import Http404
-from .filters import PlayerFilter
-
-from .forms import SignUpForm, CustomerForm
-from match.models import ScoreCard
 from django.urls import reverse
 from django.views.generic import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
+
+from match.models import ScoreCard
+from .filters import PlayerFilter
+from .forms import SignUpForm, PlayerForm
 from .models import Country
 
 User = get_user_model()
@@ -91,7 +90,7 @@ def player_detail(request, pk=None):
 @login_required
 def player_add(request):
     if request.method == 'POST':
-        form = CustomerForm(request.POST, request.FILES)
+        form = PlayerForm(request.POST, request.FILES)
         if not form.is_valid():
             return render(request, 'core/player_add.html',
                           {'form': form})
@@ -105,44 +104,9 @@ def player_add(request):
     else:
         context = {
             "title": 'Add Player',
-            "form": CustomerForm(),
+            "form": PlayerForm(),
         }
         return render(request, 'core/player_add.html', context)
-
-
-@login_required
-def customer_update(request, pk=None):
-    if not request.user.is_salesperson:
-        raise Http404
-    instance = get_object_or_404(User, pk=pk)
-    print(vars(instance))
-    if request.method == 'POST':
-        form = CustomerForm(request.POST, instance=instance)
-        if not form.is_valid():
-            return render(request, 'core/customer_update.html',
-                          {'form': form})
-        else:
-            user = form.save(commit=False)
-            user.save()
-            messages.success(request, "Successfully Updated")
-            return redirect('/')
-
-    else:
-        context = {
-            "title": 'Update Customer',
-            "form": CustomerForm(instance=instance),
-        }
-        return render(request, 'core/customer_update.html', context)
-
-
-@login_required
-def customer_delete(request, pk=None):
-    if not request.user.is_salesperson:
-        raise Http404
-    instance = get_object_or_404(User, pk=pk)
-    instance.delete()
-    messages.success(request, "Successfully deleted")
-    return redirect('/')
 
 
 class CountryListView(LoginRequiredMixin, ListView):

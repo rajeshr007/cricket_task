@@ -1,14 +1,13 @@
-from random import choice
-from string import ascii_letters
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.shortcuts import redirect, render, get_object_or_404
-from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import Http404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
+
 from .models import Team, Match, ScoreCard
+
 
 # from .forms import ProductForm
 # from .models import Product
@@ -87,24 +86,6 @@ class ScoreCardView(LoginRequiredMixin, View):
             'score_list': score_list
         }
         return render(request, 'match/score-card.html', context)
-
-
-
-
-
-@login_required
-def productList(request):
-    products = {}
-    # product_list = Product.objects.all()
-    # paginator = Paginator(product_list, 10)
-    # page = request.GET.get('page')
-    # try:
-    #     products = paginator.page(page)
-    # except PageNotAnInteger:
-    #     products = paginator.page(1)
-    # except EmptyPage:
-    #     products = paginator.page(paginator.num_pages)
-    return render(request, 'products/products.html', {'products': products})
 
 
 @login_required

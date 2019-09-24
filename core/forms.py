@@ -70,7 +70,7 @@ class SignUpForm(forms.ModelForm):
         return self.cleaned_data
 
 
-class CustomerForm(forms.ModelForm):
+class PlayerForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=30,
