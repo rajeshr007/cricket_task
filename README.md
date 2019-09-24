@@ -7,7 +7,7 @@
 git clone https://github.com/rajeshr007/cricket_task.git
 ```
 
-###2.Create a virtual environment and install dependencies.
+### 2.Create a virtual environment and install dependencies.
 
 ```
 mkvirtualenv vir_cricket
@@ -30,7 +30,7 @@ python manage.py migrate --fake
 ```
 python manage.py createsuperuser
 ```
-###6. Run the development server to verify everything is working.
+### 6. Run the development server to verify everything is working.
 
 ```
 python manage.py runserver
