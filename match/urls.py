@@ -5,12 +5,10 @@ app_name = 'matches'
 urlpatterns = [
     path('', views.TeamListView.as_view(), name='team-list'),
     path('<int:pk>/players/', views.PlayersListView.as_view(), name='team-players'),
-    path('matches/', views.MatchListView.as_view(), name='team-matches'),
+    path('matches/', views.MatchListView.as_view(), name='match-list'),
+    path('match/add/', views.MatchCreateView.as_view(), name='match-add'),
     path('score-card/', views.ScoreCardView.as_view(), name='score-card'),
-
-
-    # url(r'^add/$', views.product_add, name='product_add'),
-    # url(r'^(?P<pk>\d+)/edit/$', views.product_update, name='product_update'),
-    # url(r'^(?P<pk>\d+)/delete/$', views.product_delete, name='product_delete'),
+    path('score-card/add/', views.ScoreCardCreateView.as_view(), name='score-add'),
+    path('score-card/<int:score_id>/players/', views.ScoreCardPlayerListView.as_view(), name='players-score'),
 
 ]

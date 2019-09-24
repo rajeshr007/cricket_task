@@ -111,3 +111,4 @@ def player_add(request):
 
 class CountryListView(LoginRequiredMixin, ListView):
     model = Country
+    paginate_by = 10

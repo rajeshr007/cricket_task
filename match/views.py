@@ -1,16 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render
 from django.views import View
+from django.views.generic.edit import CreateView
+from django.views.generic import ListView
 
-from .models import Team, Match, ScoreCard
-
-
-# from .forms import ProductForm
-# from .models import Product
+from .forms import ScoreCardForm, MatchForm
+from .models import Team, Match, ScoreCard, ScoreCardPlayer
 
 
 ##Team listing
@@ -69,6 +66,21 @@ class MatchListView(LoginRequiredMixin, View):
         return render(request, 'match/matches.html', context)
 
 
+class MatchCreateView(LoginRequiredMixin, CreateView):
+    model = Match
+    form_class = MatchForm
+
+    def get_context_data(self, **kwargs):
+        kwargs['title'] = 'Match Add'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        match = form.save(commit=False)
+        match.save()
+        messages.success(self.request, "Successfully Added")
+        return redirect('matches:match-list')
+
+
 # Score view logic
 class ScoreCardView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
@@ -88,59 +100,30 @@ class ScoreCardView(LoginRequiredMixin, View):
         return render(request, 'match/score-card.html', context)
 
 
-@login_required
-def product_add(request):
-    if not request.user.is_salesperson:
-        raise Http404
+class ScoreCardCreateView(LoginRequiredMixin, CreateView):
+    model = ScoreCard
+    form_class = ScoreCardForm
 
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if not form.is_valid():
-            return render(request, 'products/products_add.html',
-                          {'form': form})
-        else:
-            product = form.save(commit=False)
-            product.save()
-            messages.success(request, "Successfully Added")
-            return redirect('products:product_list')
+    def get_context_data(self, **kwargs):
+        kwargs['title'] = 'Score Add'
+        return super().get_context_data(**kwargs)
 
-    else:
-        context = {
-            "title": 'Add Product',
-            "form": ProductForm(),
-        }
-        return render(request, 'products/products_add.html', context)
+    def form_valid(self, form):
+        score = form.save(commit=False)
+        score.save()
+        messages.success(self.request, "Successfully Added")
+        return redirect('matches:score-card')
 
 
-@login_required
-def product_update(request, pk=None):
-    if not request.user.is_salesperson:
-        raise Http404
-    instance = get_object_or_404(Product, pk=pk)
-    if request.method == 'POST':
-        form = ProductForm(request.POST, instance=instance)
-        if not form.is_valid():
-            return render(request, 'products/products_update.html',
-                          {'form': form})
-        else:
-            product = form.save(commit=False)
-            product.save()
-            messages.success(request, "Successfully Updated")
-            return redirect('products:product_list')
+class ScoreCardPlayerListView(LoginRequiredMixin, ListView):
+    model = ScoreCardPlayer
+    paginate_by = 10
 
-    else:
-        context = {
-            "title": 'Update Product',
-            "form": ProductForm(instance=instance),
-        }
-        return render(request, 'products/products_update.html', context)
+    def get_context_data(self, **kwargs):
+        kwargs['title'] = 'Player Score Card'
+        return super().get_context_data(**kwargs)
 
-
-@login_required
-def product_delete(request, pk=None):
-    if not request.user.is_salesperson:
-        raise Http404
-    instance = get_object_or_404(Product, pk=pk)
-    instance.delete()
-    messages.success(request, "Successfully Deleted")
-    return redirect('products:product_list')
+    def get_queryset(self, *args, **kwargs):
+        score_id = self.kwargs['score_id']
+        queryset_list = ScoreCardPlayer.objects.filter(score_id=score_id)
+        return queryset_list

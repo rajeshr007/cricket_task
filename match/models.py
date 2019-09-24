@@ -89,6 +89,7 @@ class Match(models.Model):
 
     class Meta:
         db_table = "match"
+        ordering = ['-created_at']
 
 
 """
@@ -139,6 +140,7 @@ class ScoreCard(models.Model):
 
     class Meta:
         db_table = "score_card"
+        ordering = ['-created_at']
 
     def score_status_list(self):
         return self.status

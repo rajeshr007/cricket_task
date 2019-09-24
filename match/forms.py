@@ -25,10 +25,16 @@ class ScoreCardForm(forms.ModelForm):
         widget=forms.NumberInput(attrs={'step': 0.1, 'class': 'form-control'}),
         required=True)
 
-    status = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control'}),
-        max_length=30,
-        required=True)
+    status = forms.ChoiceField(
+        choices=(
+            ('won', 'Won'),
+            ('loss', 'Loss'),
+            ('draw', 'Draw'),
+        ),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
+    )
+
     point = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'form-control'}),
         required=True)
@@ -53,6 +59,11 @@ class MatchForm(forms.ModelForm):
     team2 = forms.ModelChoiceField(
         queryset=Team.objects.all(),
         widget=forms.Select(attrs={'class': 'form-control'}),
+        required=True
+    )
+
+    match_date = forms.DateField(
+        widget=forms.DateInput(attrs={'class': 'form-control date'}),
         required=True
     )
 

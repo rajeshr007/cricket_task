@@ -10,7 +10,7 @@
 
 {% block main %}
     <div class="page-header">
-        <a href="{% url 'player_add' %}" class="btn btn-primary pull-right">
+        <a href="{% url 'matches:match-add' %}" class="btn btn-primary pull-right">
             <span class="glyphicon glyphicon-plus"></span> Add Match
         </a>
         <h1>{{title}}</h1>
@@ -33,7 +33,6 @@
                 <th>Team Second</th>
                 <th>Match Date</th>
                 <th>Match Result</th>
-                <th>Option</th>
             </tr>
             </thead>
             <tbody>
@@ -45,10 +44,6 @@
                     <td>{{ match.team2.name }}</td>
                     <td>{{ match.match_date|date:"Y-m-d" }}</td>
                     <td>{{ match.match_result }}</td>
-                    <td><a href="{# url 'player_detail' player.pk #}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                    </a>
-                    </td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -28,31 +28,32 @@
         <thead>
         <tr>
             <th>S.No</th>
-            <th>Match</th>
-            <th>Team Name</th>
-            <th>Overs</th>
+            <th>Player</th>
             <th>Runs</th>
             <th>Wicket</th>
-            <th>Match Status</th>
-            <th>Team Points</th>
-            <th>Option</th>
+            <th>Over</th>
+            <th>Fifty</th>
+            <th>Hundred</th>
+            <th>Maiden over</th>
+            <th>Fours</th>
+            <th>Sixs</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
-        {% for score in score_list %}
+        {% for player in object_list %}
         <tr>
             <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ score.match.name }}</td>
-            <td>{{ score.team.name }}</td>
-            <td>{{ score.over }}</td>
-            <td>{{ score.runs }}</td>
-            <td>{{ score.wicket }}</td>
-            <td>{{ score.status }}</td>
-            <td>{{ score.point }}</td>
-            <td><a href="{% url 'matches:players-score' score.pk %}">
-                <span class="glyphicon glyphicon-eye-open"></span>
-            </a>
-            </td>
+            <td>{{ player.player_id.get_full_name }}</td>
+            <td>{{ player.runs }}</td>
+            <td>{{ player.wicket }}</td>
+            <td>{{ player.over }}</td>
+            <td>{{ player.fifty }}</td>
+            <td>{{ player.hundred }}</td>
+            <td>{{ player.meadan_over }}</td>
+            <td>{{ player.fours }}</td>
+            <td>{{ player.sixs }}</td>
+            <td>{{ player.status }}</td>
         </tr>
         {% endfor %}
         </tbody>
@@ -60,7 +61,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {% include 'paginator.html' with paginator=score_list %}
+            {% include 'paginator.html' with paginator=page_obj %}
         </div>
     </div>
 

@@ -13,6 +13,8 @@
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
+
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -33,7 +35,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{% url 'players' %}">Players</a></li>
                         <li><a href="{% url 'matches:team-list' %}">Team</a></li>
-                        <li><a href="{% url 'matches:team-matches' %}">Matches</a></li>
+                        <li><a href="{% url 'matches:match-list' %}">Matches</a></li>
                         <li><a href="{% url 'matches:score-card' %}">Score Card</a></li>
                         <li><a href="{% url 'country-list' %}">Country List</a></li>
                     </ul>
