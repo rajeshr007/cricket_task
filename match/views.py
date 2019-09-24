@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .models import Team
+from .models import Team, Match
 
 
 # from .forms import ProductForm
@@ -33,10 +33,10 @@ class TeamListView(LoginRequiredMixin, View):
             'teams': teams,
         }
 
-        return render(request, 'products/products.html', context)
+        return render(request, 'match/team.html', context)
 
 
-##Player details after clicking o team
+# Player details after clicking o team
 class PlayersListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         team_obj = Team.objects.get(pk=self.kwargs.get('pk'))
@@ -50,6 +50,25 @@ class PlayersListView(LoginRequiredMixin, View):
         except EmptyPage:
             players = paginator.page(paginator.num_pages)
         return render(request, 'core/players.html', {'players': players})
+
+
+# Match view logic
+class MatchListView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        match_list = Match.objects.all()
+        paginator = Paginator(match_list, 10)
+        page = request.GET.get('page')
+        try:
+            matches = paginator.page(page)
+        except PageNotAnInteger:
+            matches = paginator.page(1)
+        except EmptyPage:
+            matches = paginator.page(paginator.num_pages)
+        context = {
+            "title": 'Matches',
+            'matches': matches
+        }
+        return render(request, 'match/matches.html', context)
 
 
 @login_required
