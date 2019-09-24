@@ -20,21 +20,29 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from core.views import signup, CountryListView, PlayerList, dashboard, player_detail, player_add
+from core.views import (signup, CountryListView, player_list,
+                        dashboard, player_detail, player_add)
 
 urlpatterns = [
+    # dashboard url
     path('', dashboard, name='home'),
+
+    # profile urls
     path('login', auth_views.LoginView.as_view(template_name='core/cover.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup/', signup, name='signup'),
 
-    path('players/', PlayerList, name='players'),
+    # players urls
+    path('players/', player_list, name='players'),
     path('player/<int:pk>/', player_detail, name='player_detail'),
     path('player/add/', player_add, name='player_add'),
 
+    # country url
     path('country-list/', CountryListView.as_view(), name='country-list'),
 
+    # including team app urls
     path('team/', include("match.urls")),
+
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:

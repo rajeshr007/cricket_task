@@ -22,6 +22,7 @@ def UniqueUsernameIgnoreCaseValidator(value):
         raise ValidationError('User with this Username already exists.')
 
 
+# Sign Up Form
 class SignUpForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),
@@ -70,6 +71,7 @@ class SignUpForm(forms.ModelForm):
         return self.cleaned_data
 
 
+# Player Model Form
 class PlayerForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),

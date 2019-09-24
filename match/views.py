@@ -10,7 +10,7 @@ from .forms import ScoreCardForm, MatchForm
 from .models import Team, Match, ScoreCard, ScoreCardPlayer
 
 
-##Team listing
+# Team listing
 class TeamListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         product_list = Team.objects.all()
@@ -31,7 +31,7 @@ class TeamListView(LoginRequiredMixin, View):
         return render(request, 'match/team.html', context)
 
 
-# Player details after clicking o team
+# Player details after clicking on team
 class PlayersListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         team_obj = Team.objects.get(pk=self.kwargs.get('pk'))
@@ -66,6 +66,7 @@ class MatchListView(LoginRequiredMixin, View):
         return render(request, 'match/matches.html', context)
 
 
+# Add Match view logic
 class MatchCreateView(LoginRequiredMixin, CreateView):
     model = Match
     form_class = MatchForm
@@ -100,6 +101,7 @@ class ScoreCardView(LoginRequiredMixin, View):
         return render(request, 'match/score-card.html', context)
 
 
+# ScoreCard add view logic
 class ScoreCardCreateView(LoginRequiredMixin, CreateView):
     model = ScoreCard
     form_class = ScoreCardForm
@@ -115,6 +117,7 @@ class ScoreCardCreateView(LoginRequiredMixin, CreateView):
         return redirect('matches:score-card')
 
 
+# Player Score Card after clicking on score-card
 class ScoreCardPlayerListView(LoginRequiredMixin, ListView):
     model = ScoreCardPlayer
     paginate_by = 10

@@ -2,6 +2,7 @@ from django import forms
 from .models import ScoreCard, Team, Match
 
 
+# Form for Score Card create
 class ScoreCardForm(forms.ModelForm):
     team = forms.ModelChoiceField(
         queryset=Team.objects.all(),
@@ -44,6 +45,7 @@ class ScoreCardForm(forms.ModelForm):
         fields = ['match', 'team', 'runs', 'wicket', 'over', 'status', 'point']
 
 
+# Form for Match Form create
 class MatchForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control'}),

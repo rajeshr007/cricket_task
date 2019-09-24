@@ -15,6 +15,7 @@ from .models import Country
 User = get_user_model()
 
 
+# Dashboard view
 def dashboard(request):
     if request.user.is_authenticated:
         scorecard_obj = ScoreCard.objects.all()
@@ -34,6 +35,7 @@ def dashboard(request):
         return render(request, 'core/cover.html')
 
 
+# signup user view
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -58,13 +60,14 @@ def signup(request):
                       {'form': SignUpForm()})
 
 
+# Player listing view
 @login_required
-def PlayerList(request):
-    player_list = User.players.filter(is_active=True)
-    filter = PlayerFilter(request.GET, queryset=player_list)
+def player_list(request):
+    players = User.players.filter(is_active=True)
+    filter = PlayerFilter(request.GET, queryset=players)
     if request.GET:
-        player_list = filter.qs
-    paginator = Paginator(player_list, 10)
+        players = filter.qs
+    paginator = Paginator(players, 10)
     page = request.GET.get('page')
     try:
         players = paginator.page(page)
@@ -75,6 +78,7 @@ def PlayerList(request):
     return render(request, 'core/players.html', {'players': players, 'form': filter.form})
 
 
+# Player detail view
 @login_required
 def player_detail(request, pk=None):
     user_obj = get_object_or_404(User, pk=pk)
@@ -87,6 +91,7 @@ def player_detail(request, pk=None):
     return render(request, 'core/player_details.html', context)
 
 
+# Add Player view
 @login_required
 def player_add(request):
     if request.method == 'POST':
@@ -109,6 +114,7 @@ def player_add(request):
         return render(request, 'core/player_add.html', context)
 
 
+# Listing Country Generic View
 class CountryListView(LoginRequiredMixin, ListView):
     model = Country
     paginate_by = 10
