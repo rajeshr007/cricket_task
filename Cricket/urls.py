@@ -14,13 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls import include
 from django.conf.urls.static import static
-from django.conf.urls import url, include
-from django.urls import path, re_path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from core.views import signup, PlayerList, dashboard,player_detail, player_add, customer_update, customer_delete
-from match.views import productList
+from django.urls import path
+
+from core.views import signup, CountryListView, PlayerList, dashboard, player_detail, player_add
+
 urlpatterns = [
     path('', dashboard, name='home'),
     path('login', auth_views.LoginView.as_view(template_name='core/cover.html'), name='login'),
@@ -31,14 +32,9 @@ urlpatterns = [
     path('player/<int:pk>/', player_detail, name='player_detail'),
     path('player/add/', player_add, name='player_add'),
 
-    path('player/match/', productList, name='match'),
+    path('country-list/', CountryListView.as_view(), name='country-list'),
 
     path('team/', include("match.urls")),
-
-    # url(r'^customer/(?P<pk>\d+)/edit/$', customer_update, name='customer_update'),
-    # url(r'^customer/(?P<pk>\d+)/delete/$', customer_delete, name='customer_delete'),
-    # url(r'^product/', include("products.urls", namespace='products')),
-    # url(r'^transaction/', include("transactions.urls", namespace='transactions')),
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:

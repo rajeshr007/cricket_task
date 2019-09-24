@@ -119,6 +119,6 @@ MEDIA_ROOT = PROJECT_DIR.parent.child('media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = '/transaction/'
+LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'core.User'

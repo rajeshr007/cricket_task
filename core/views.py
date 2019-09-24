@@ -9,6 +9,10 @@ from .filters import PlayerFilter
 from .forms import SignUpForm, CustomerForm
 from match.models import ScoreCard
 from django.urls import reverse
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Country
+
 User = get_user_model()
 
 
@@ -139,3 +143,7 @@ def customer_delete(request, pk=None):
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect('/')
+
+
+class CountryListView(LoginRequiredMixin, ListView):
+    model = Country

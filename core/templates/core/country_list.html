@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}Country List{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/common.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block main %}
+<div class="page-header">
+    <h1>Country List</h1>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<div class="users">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for country in object_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ country.name }}</td>
+            <td>{{ country.code }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+{% endblock main %}

@@ -8,8 +8,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .models import Team, Match
-
+from .models import Team, Match, ScoreCard
 
 # from .forms import ProductForm
 # from .models import Product
@@ -69,6 +68,28 @@ class MatchListView(LoginRequiredMixin, View):
             'matches': matches
         }
         return render(request, 'match/matches.html', context)
+
+
+# Score view logic
+class ScoreCardView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        score_list = ScoreCard.objects.all()
+        paginator = Paginator(score_list, 10)
+        page = request.GET.get('page')
+        try:
+            score_list = paginator.page(page)
+        except PageNotAnInteger:
+            score_list = paginator.page(1)
+        except EmptyPage:
+            score_list = paginator.page(paginator.num_pages)
+        context = {
+            "title": 'Score Card',
+            'score_list': score_list
+        }
+        return render(request, 'match/score-card.html', context)
+
+
+
 
 
 @login_required

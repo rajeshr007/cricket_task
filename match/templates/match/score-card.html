@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}{{title}}{% endblock %}
+
+{% block head %}
+<link href="{% static 'css/common.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block main %}
+<div class="page-header">
+    <a href="{% url 'player_add' %}" class="btn btn-primary pull-right">
+        <span class="glyphicon glyphicon-plus"></span> Add Score
+    </a>
+    <h1>{{title}}</h1>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<div class="users">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Match</th>
+            <th>Team Name</th>
+            <th>Overs</th>
+            <th>Runs</th>
+            <th>Wicket</th>
+            <th>Match Status</th>
+            <th>Team Points</th>
+            <th>Option</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for score in score_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ score.match.name }}</td>
+            <td>{{ score.team.name }}</td>
+            <td>{{ score.over }}</td>
+            <td>{{ score.runs }}</td>
+            <td>{{ score.wicket }}</td>
+            <td>{{ score.status }}</td>
+            <td>{{ score.point }}</td>
+            <td><a href="{# url 'player_detail' player.pk #}">
+                <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'paginator.html' with paginator=score_list %}
+        </div>
+    </div>
+
+</div>
+{% endblock main %}

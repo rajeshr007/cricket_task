@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.TeamListView.as_view(), name='team-list'),
     path('<int:pk>/players/', views.PlayersListView.as_view(), name='team-players'),
     path('matches/', views.MatchListView.as_view(), name='team-matches'),
+    path('score-card/', views.ScoreCardView.as_view(), name='score-card'),
 
 
     # url(r'^add/$', views.product_add, name='product_add'),
