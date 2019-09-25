@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 24, 2019 at 11:09 AM
+-- Generation Time: Sep 25, 2019 at 12:32 PM
 -- Server version: 5.7.27
 -- PHP Version: 7.2.19-0ubuntu0.18.04.2
 
@@ -154,7 +154,8 @@ INSERT INTO `country` (`id`, `code`, `name`, `flag`, `created_at`, `updated_at`)
 (3, 'SA', 'South Africa', NULL, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:46.895294'),
 (4, 'NZ', 'New Zeeland', NULL, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:46.895294'),
 (5, 'BD', 'Bangladesh', NULL, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:46.895294'),
-(6, 'SL', 'Sri Lanka', NULL, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:46.895294');
+(6, 'SL', 'Sri Lanka', NULL, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:46.895294'),
+(7, 'PK', 'Pakistan', 'country_flag/icon87.png', '2019-09-25 06:33:35.578766', '2019-09-25 06:33:35.578801');
 
 -- --------------------------------------------------------
 
@@ -303,7 +304,10 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (22, 'match', '0002_auto_20190918_0844', '2019-09-18 11:08:09.948647'),
 (23, 'core', '0004_auto_20190918_1122', '2019-09-18 11:22:51.682105'),
 (24, 'core', '0005_remove_user_random_string', '2019-09-18 11:23:14.368233'),
-(25, 'match', '0003_auto_20190918_1209', '2019-09-18 12:09:50.830271');
+(25, 'match', '0003_auto_20190918_1209', '2019-09-18 12:09:50.830271'),
+(26, 'core', '0002_auto_20190924_0603', '2019-09-24 06:04:27.525357'),
+(27, 'core', '0003_auto_20190925_0701', '2019-09-25 07:01:17.085479'),
+(28, 'match', '0002_auto_20190925_0701', '2019-09-25 07:01:17.140637');
 
 -- --------------------------------------------------------
 
@@ -325,6 +329,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('4dluwbgaurascufwdtt6zxc91yhzdfn0', 'MzMyZDRhZWQzMmM4OGU5OTViOTBmNTNmZTgxYzVhYTBhZGQzMmU0Yzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhYTA5ZWMyNTc5MjkzNmRkYjE0ZWY0ZDdjYjUxYmYyNDhmOWI1MzgwIiwiX3Nlc3Npb25fZXhwaXJ5IjowfQ==', '2019-09-30 13:58:23.929593'),
 ('773o8y5dt7ecwk6d6h63jzddlzujou0m', 'MmVmMGNlMDdjMGIxNTgwNTNiYmY5NjE3MmM3YmVhNTgyZjVhMjMxZjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0NWVlODA2NTQ2YTNhZTM0MDk1YjVlZjliYWE5YWQ5ZjNmOTJhYjNkIiwiX3Nlc3Npb25fZXhwaXJ5IjowfQ==', '2019-03-14 19:16:13.830696'),
 ('9ujamlirf61l2i48i03co5dy3dkcnjxo', 'ZTYwYzcyNjEwODI1Y2Q3MjRkZDZmNGYyNDUxNjNkN2QzNmZjYmFkNzp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxNDE0MWU1ZGM5ZjQ3YzRjZTBlZTY5MmFjYTMzMGEwYjVjYzFlMWUyIiwiX3Nlc3Npb25fZXhwaXJ5IjowfQ==', '2019-09-23 08:31:29.798854'),
+('dlub186zyw5265bzoicqq48bdc4rvstq', 'MWFkY2ZkOGQzNGJlYTEzNjJiZTBkNGU3ZjJiYTg0NjYzMDAwYzhkODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMTdmNDViMjhkNDQyM2RhMGU5YWJiOWRkOTRkODVjODQ4Mjk1NzUxIn0=', '2019-10-09 06:04:06.858546'),
 ('fcui0vm9arczyknksrc8q3gp62aplrey', 'OGUzZjYwNGRhMzJmYmIxY2VmYWUwNWMwNzkwMTA5NDgzMDYwZTg1OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhYTA5ZWMyNTc5MjkzNmRkYjE0ZWY0ZDdjYjUxYmYyNDhmOWI1MzgwIn0=', '2019-09-23 08:14:53.948878'),
 ('kyoi4uggcajlbfq3eqce0sobpgbpfkn7', 'MzMyZDRhZWQzMmM4OGU5OTViOTBmNTNmZTgxYzVhYTBhZGQzMmU0Yzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhYTA5ZWMyNTc5MjkzNmRkYjE0ZWY0ZDdjYjUxYmYyNDhmOWI1MzgwIiwiX3Nlc3Npb25fZXhwaXJ5IjowfQ==', '2019-10-01 19:13:06.823680'),
 ('lqj6rfqir7o5meqfympmnmxrfq7kfn0a', 'MWFkY2ZkOGQzNGJlYTEzNjJiZTBkNGU3ZjJiYTg0NjYzMDAwYzhkODp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMTdmNDViMjhkNDQyM2RhMGU5YWJiOWRkOTRkODVjODQ4Mjk1NzUxIn0=', '2019-10-06 13:26:59.089033'),
@@ -361,7 +366,9 @@ CREATE TABLE `match` (
 INSERT INTO `match` (`id`, `name`, `match_date`, `match_result`, `team1_id`, `team2_id`, `created_at`, `updated_at`) VALUES
 (1, 'First leauge-IND-AUS ODI series', '2019-03-02 19:55:49.000000', 'IND won by 7 wicket', 1, 2, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
 (2, 'Second leauge-IND-BAN ODI series', '2019-03-01 19:58:15.000000', 'BAN won by 2 runs', 1, 6, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
-(3, 'Third leauge AUS-NZ ODI series', NULL, NULL, 2, 5, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415');
+(3, 'Third leauge AUS-NZ ODI series', NULL, NULL, 2, 5, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
+(4, 'India', '2019-09-16 00:00:00.000000', '1', 1, 1, '2019-09-24 06:58:42.030769', '2019-09-24 06:58:42.030818'),
+(5, 'India vs wes', '2019-09-13 00:00:00.000000', 'sdff', 3, 3, '2019-09-24 07:01:30.761559', '2019-09-24 07:01:30.761606');
 
 -- --------------------------------------------------------
 
@@ -407,7 +414,8 @@ INSERT INTO `score_card` (`id`, `runs`, `wicket`, `over`, `status`, `point`, `ma
 (3, 245, 5, 48.2, 'draw', 1, 2, 1, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
 (4, 245, 7, 50, 'draw', 1, 2, 6, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
 (5, 305, 10, 50, 'loss', 0, 3, 2, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
-(6, 311, 6, 48.3, 'won', 3, 3, 5, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415');
+(6, 311, 6, 48.3, 'won', 3, 3, 5, '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
+(7, 12, 10, 2.2, 'won', 1, 1, 1, '2019-09-24 07:15:57.029946', '2019-09-24 07:15:57.029989');
 
 -- --------------------------------------------------------
 
@@ -491,7 +499,8 @@ INSERT INTO `team` (`id`, `name`, `logo_uri`, `club_state`, `created_at`, `updat
 (3, 'South Africa', 'team_logo/southA.png', 'South Flag', '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
 (4, 'Sri Lanka', 'team_logo/sriL.png', 'Sri Lanka Fan Club', '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
 (5, 'New Zeeland', 'team_logo/westI.jpeg', 'New Zee Young club', '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
-(6, 'Bangladesh', 'team_logo/cri-logo1.jpg', 'Bangla Worriers', '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415');
+(6, 'Bangladesh', 'team_logo/cri-logo1.jpg', 'Bangla Worriers', '2019-09-18 08:44:45.837415', '2019-09-18 08:44:45.837415'),
+(7, 'Pakistan', 'team_logo/sd123.png', 'Pakisgtan sdfcz', '2019-09-25 06:48:47.776410', '2019-09-25 06:48:47.776444');
 
 -- --------------------------------------------------------
 
@@ -524,7 +533,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `is_staff`, `is_active`, `date_joined`, `email`, `image_uri`, `user_type`, `jersy_number`, `player_type`, `country_id`, `team_id`) VALUES
-(1, 'pbkdf2_sha256$150000$4CWwPfgwduod$4rQtjK9AZ2rssPA1pnK9k67HnJ8gYiZlUZBi6C0D/Ls=', '2019-09-24 03:04:21.347363', 1, 'admin', '', '', 1, 1, '2019-02-28 18:53:40.000000', 'admin@admin.com', 'image_user/aus_7GHu87Z.jpeg', 'admin', '1', 'batsman', NULL, NULL),
+(1, 'pbkdf2_sha256$150000$4CWwPfgwduod$4rQtjK9AZ2rssPA1pnK9k67HnJ8gYiZlUZBi6C0D/Ls=', '2019-09-25 06:04:06.780908', 1, 'admin', '', '', 1, 1, '2019-02-28 18:53:40.000000', 'admin@admin.com', 'image_user/aus_7GHu87Z.jpeg', 'admin', '1', 'batsman', NULL, NULL),
 (2, 'pbkdf2_sha256$150000$ZAIhwpXGv8tF$JC/XffNILezh9x+YYgGOxDYYpxLHjW74IUUwxY9yxH8=', '2019-09-09 08:31:29.728648', 0, 'saurabh@dispostable.com', 'Saurabh', 'Player one', 0, 1, '2019-02-28 19:12:59.000000', 'saurabh@dispostable.com', 'image_user/5b33c37a1ae6621d008b499c-750-562.jpg', 'player', '1', 'batsman', 1, 1),
 (3, 'pbkdf2_sha256$150000$jGD4aoZyjoxa$Yg1rZbJdlchkVlpp4608mfOO2DdGMsoChXCBkagW2yQ=', NULL, 0, 'virat@dispostable.com', 'Virat', 'Player two', 0, 1, '2019-02-28 19:19:10.000000', 'virat@dispostable.com', 'image_user/icon87.png', 'player', '2', 'batsman', 1, 1),
 (4, 'pbkdf2_sha256$150000$OxEt7H1XyNMa$XqqnvHLMGN5xWoDitCirgcGVg644PAQlLMBXUm/9P/0=', NULL, 0, 'raina@dispostable.com', 'Raina', 'Player three', 0, 1, '2019-02-28 19:25:58.119836', 'raina@dispostable.com', '', 'player', '2', 'batsman', 1, 1),
@@ -739,7 +748,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `country`
 --
 ALTER TABLE `country`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `django_admin_log`
 --
@@ -754,12 +763,12 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `match`
 --
 ALTER TABLE `match`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `match_player_detail`
 --
@@ -769,7 +778,7 @@ ALTER TABLE `match_player_detail`
 -- AUTO_INCREMENT for table `score_card`
 --
 ALTER TABLE `score_card`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `score_card_player`
 --
@@ -779,7 +788,7 @@ ALTER TABLE `score_card_player`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `user`
 --
