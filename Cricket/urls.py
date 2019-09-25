@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from core.views import (signup, CountryListView, player_list,
+from core.views import (signup, CountryListView,CountryCreateView, player_list,
                         dashboard, player_detail, player_add)
 
 urlpatterns = [
@@ -39,6 +39,7 @@ urlpatterns = [
 
     # country url
     path('country-list/', CountryListView.as_view(), name='country-list'),
+    path('country/add/', CountryCreateView.as_view(), name='country-add'),
 
     # including team app urls
     path('team/', include("match.urls")),

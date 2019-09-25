@@ -6,6 +6,7 @@ urlpatterns = [
 
     # Team urls
     path('', views.TeamListView.as_view(), name='team-list'),
+    path('add/', views.TeamCreateView.as_view(), name='team-add'),
     path('<int:pk>/players/', views.PlayersListView.as_view(), name='team-players'),
 
     # Match urls

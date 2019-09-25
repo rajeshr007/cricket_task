@@ -10,6 +10,9 @@
 
 {% block main %}
 <div class="page-header">
+    <a href="{% url 'matches:team-add' %}" class="btn btn-primary pull-right">
+    <span class="glyphicon glyphicon-plus"></span> Add Team
+    </a>
     <h1>{{title}}</h1>
 </div>
 {% if messages %}

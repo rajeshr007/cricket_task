@@ -9,9 +9,9 @@ from django.views.generic import ListView
 
 from match.models import ScoreCard
 from .filters import PlayerFilter
-from .forms import SignUpForm, PlayerForm
+from .forms import SignUpForm, PlayerForm,CountryForm
 from .models import Country
-
+from django.views.generic.edit import CreateView
 User = get_user_model()
 
 
@@ -118,3 +118,19 @@ def player_add(request):
 class CountryListView(LoginRequiredMixin, ListView):
     model = Country
     paginate_by = 10
+
+
+# Add Match view logic
+class CountryCreateView(LoginRequiredMixin, CreateView):
+    model = Country
+    form_class = CountryForm
+
+    def get_context_data(self, **kwargs):
+        kwargs['title'] = 'Country Add'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        country = form.save(commit=False)
+        country.save()
+        messages.success(self.request, "Successfully Added")
+        return redirect(reverse('country-list'))

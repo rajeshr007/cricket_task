@@ -131,3 +131,23 @@ class PlayerForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'jersy_number', 'player_type', 'team', 'country',
                   'image_uri']
+
+
+# Country Model Form
+class CountryForm(forms.ModelForm):
+    code = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=30,
+        required=True)
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=30,
+        required=False)
+
+    flag = forms.ImageField(
+        required=False
+    )
+
+    class Meta:
+        model = Country
+        fields = ['code', 'name', 'flag']

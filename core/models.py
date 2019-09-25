@@ -21,6 +21,7 @@ class Country(models.Model):
 
     class Meta:
         db_table = "country"
+        ordering = ['-created_at']
 
 
 class AdminManager(models.Manager):

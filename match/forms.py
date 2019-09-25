@@ -77,3 +77,24 @@ class MatchForm(forms.ModelForm):
     class Meta:
         model = Match
         fields = ['name', 'team1', 'team2', 'match_date', 'match_result']
+
+
+# Form for Team Form create
+class TeamForm(forms.ModelForm):
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=30,
+        required=True)
+
+    club_state = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=30,
+        required=True)
+    logo_uri = forms.ImageField(
+        label="Logo",
+        required=False
+    )
+
+    class Meta:
+        model = Team
+        fields = ['name', 'club_state', 'logo_uri']

@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView
 
-from .forms import ScoreCardForm, MatchForm
+from .forms import ScoreCardForm, MatchForm, TeamForm
 from .models import Team, Match, ScoreCard, ScoreCardPlayer
 
 
@@ -29,6 +29,22 @@ class TeamListView(LoginRequiredMixin, View):
         }
 
         return render(request, 'match/team.html', context)
+
+
+# Add Team view logic
+class TeamCreateView(LoginRequiredMixin, CreateView):
+    model = Team
+    form_class = TeamForm
+
+    def get_context_data(self, **kwargs):
+        kwargs['title'] = 'Team Add'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        team = form.save(commit=False)
+        team.save()
+        messages.success(self.request, "Successfully Added")
+        return redirect('matches:team-list')
 
 
 # Player details after clicking on team

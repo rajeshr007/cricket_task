@@ -10,6 +10,9 @@
 
 {% block main %}
 <div class="page-header">
+       <a href="{% url 'country-add' %}" class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span> Add Country
+        </a>
     <h1>Country List</h1>
 </div>
 {% if messages %}
@@ -27,6 +30,7 @@
             <th>S.No</th>
             <th>Name</th>
             <th>Code</th>
+            <th>Country Flag</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +39,14 @@
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ country.name }}</td>
             <td>{{ country.code }}</td>
+              <td>
+                <div class="view-first">
+                    {%if country.flag %}
+                    <img class="img-responsive " src="{{country.flag.url}}"
+                         alt="image" width="100" height="50">
+                    {% endif %}
+                </div>
+              </td>
         </tr>
         {% endfor %}
         </tbody>
